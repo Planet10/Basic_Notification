@@ -15,7 +15,7 @@ import android.view.View;
 import static android.support.v4.app.NotificationCompat.Builder;
 
 public class Main extends Activity {
-    NewMessageNotification newMessageNotification;
+    NotificationHelper notificationHelper;
     /**
      * A numeric value that identifies the notification that we'll be sending.
      * This value needs to be unique within this app, but it doesn't need to be
@@ -36,12 +36,10 @@ public class Main extends Activity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        newMessageNotification = new NewMessageNotification();
         return true;
     }
 
@@ -59,7 +57,7 @@ public class Main extends Activity {
 
     public void sendNotification(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lipsum.com/"));
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // BEGIN_INCLUDE (build_notification)
         /**
@@ -72,7 +70,7 @@ public class Main extends Activity {
         //set the notification to auto cancel
         builder.setAutoCancel(true);
         //build the notifications appearance
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.ic_launcher));
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
         builder.setContentTitle("Basic Notifications Sample");
         builder.setContentText("Time to learn about notifications");
         builder.setSubText("Tap to view documentation about notifications");
@@ -82,5 +80,4 @@ public class Main extends Activity {
         notificationManager.notify(NOTIFICATION_ID, builder.build());
 
     }
-
 }
